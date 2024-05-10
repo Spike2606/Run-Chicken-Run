@@ -22,13 +22,17 @@ public class DeployTree : MonoBehaviour
     }
 
     private void SpawnEnemy()
-    {
-        // Calculate a random X position within the screen bounds
-        float spawnXPosition = Random.Range(-screenHalfWidth, screenHalfWidth);
+{
+    // Calculate a random X position within the screen bounds
+    float spawnXPosition = Random.Range(-screenHalfWidth, screenHalfWidth);
 
-        // Instantiate the tree at the calculated position
-        Instantiate(treePrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity);
-    }
+    // Instantiate the tree at the calculated position
+    GameObject newTree = Instantiate(treePrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity);
+
+    // Destroy the cloned object after a specified time (e.g., 5 seconds)
+    Destroy(newTree, 5f);
+}
+
 
     private IEnumerator TreeWave()
     {
