@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
-    public float speed;
+    public float speed = 1f;
+    public float speedIncreaseRate = 0.1f; // Rate at which speed increases over time
     public float spawnPositionY;
     public float despawnPositionY;
     public bool randomizeTheXPosition;
@@ -22,6 +23,9 @@ public class MoveController : MonoBehaviour
 
     private void Update()
     {
+        // Increase speed over time
+        speed += speedIncreaseRate * Time.deltaTime;
+        
         // Move the object upwards along the Y-axis.
         transform.position += new Vector3(0, speed * Time.deltaTime, 0);
 
