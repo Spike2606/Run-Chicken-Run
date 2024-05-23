@@ -4,19 +4,22 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuPanel;
+    private ChickenMovement chickenMovement; 
 
-    void Update()
+    void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (chickenMovement == null)
         {
-            PauseGame();
+            chickenMovement = FindObjectOfType<ChickenMovement>();
         }
     }
-
     public void PauseGame()
     {
-        Time.timeScale = 0;
-        pauseMenuPanel.SetActive(true);
+        if (chickenMovement != null && !chickenMovement.isDead)
+        {
+            Time.timeScale = 0;
+            pauseMenuPanel.SetActive(true);
+        }
     }
 
     public void ResumeGame()
@@ -26,8 +29,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void BackToMainMenu()
-{
-    Time.timeScale = 1;
-    SceneManager.LoadScene(0);
-}
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+    }
 }
