@@ -9,19 +9,19 @@ public class ChickenMovement : MonoBehaviour
     private Rigidbody2D body;
     public GameObject gameOverPanel;
     public AudioSource collisionSound;
-    public bool isDead = false; // Zmienna przechowuj¹ca stan œmierci
+    public bool isDead = false; 
 
     void Awake()
     {
         Time.timeScale = 1f;
         body = GetComponent<Rigidbody2D>();
         gameOverPanel.SetActive(false);
-        isDead = false; // Inicjalizacja zmiennej
+        isDead = false; 
     }
 
     private void Update()
     {
-        if (isDead) return; // Jeœli obiekt jest martwy, nie wykonuj aktualizacji ruchu
+        if (isDead) return; 
 
         float horizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
@@ -34,7 +34,7 @@ public class ChickenMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isDead = true; // Ustaw zmienn¹ na true, gdy obiekt umiera
+        isDead = true; 
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
 
@@ -44,12 +44,12 @@ public class ChickenMovement : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1f; // Wznów czas
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Prze³aduj bie¿¹c¹ scenê
+        Time.timeScale = 1f; 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
     }
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene(0); // Za³aduj scenê o indeksie 0 (menu g³ówne)
+        SceneManager.LoadScene(0);
     }
 }
