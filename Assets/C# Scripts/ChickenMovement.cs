@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ChickenMovement : MonoBehaviour
 {
@@ -11,17 +12,36 @@ public class ChickenMovement : MonoBehaviour
     public AudioSource collisionSound;
     public bool isDead = false; 
 
+    private bool isGameStarted = false;
+
+    public TextMeshProUGUI startGameText;
+
     void Awake()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
         body = GetComponent<Rigidbody2D>();
         gameOverPanel.SetActive(false);
         isDead = false; 
+        startGameText = GameObject.Find("startGameText").GetComponent<TextMeshProUGUI>();
+        startGameText.gameObject.SetActive(true);
     }
 
     private void Update()
     {
         if (isDead) return; 
+
+        if (!isGameStarted)
+        {
+            // Check for 'a', 'd', or arrow key presses to start the game
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || 
+                Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                isGameStarted = true;
+                Time.timeScale = 1f;
+                startGameText.gameObject.SetActive(false); // Unfreeze the game
+            }
+            return; // Do not process movement until the game has started
+        }
 
         float horizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
@@ -46,6 +66,7 @@ public class ChickenMovement : MonoBehaviour
     {
         Time.timeScale = 1f; 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+        
     }
 
     public void BackToMainMenu()
