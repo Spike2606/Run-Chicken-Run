@@ -12,4 +12,4 @@ You can also play the game directly from the following link -
 ![menu chicken](https://github.com/Spike2606/Run-Chicken-Run/assets/169406407/d7dec614-4dcd-42e0-813d-0e6e329232f0)
 
 ## Credits
-**Music - AdhesiveWombat - Night Shade**
+'**Music - AdhesiveWombat - Night Shade**'
